@@ -1,0 +1,59 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-adventure-50: #fff7ed;
+  --color-adventure-100: #ffedd5;
+  --color-adventure-200: #fed7aa;
+  --color-adventure-300: #fdba74;
+  --color-adventure-400: #fb923c;
+  --color-adventure-500: #f2711d;
+  --color-adventure-600: #d9540f;
+  --color-adventure-700: #b3400d;
+  --color-adventure-800: #8f3312;
+  --color-adventure-900: #762c12;
+
+  --color-jungle-50: #ecfdf5;
+  --color-jungle-100: #d1fae5;
+  --color-jungle-200: #a7f3d0;
+  --color-jungle-300: #6ee7b7;
+  --color-jungle-400: #34d399;
+  --color-jungle-500: #0f9d76;
+  --color-jungle-600: #0a7d5e;
+  --color-jungle-700: #0b6350;
+  --color-jungle-800: #0d4f41;
+  --color-jungle-900: #0a3f35;
+
+  --color-ink-50: #f7f7f8;
+  --color-ink-100: #eeedf0;
+  --color-ink-200: #d8d6de;
+  --color-ink-300: #b3aebe;
+  --color-ink-400: #887f9c;
+  --color-ink-500: #695f7d;
+  --color-ink-600: #514964;
+  --color-ink-700: #403a4f;
+  --color-ink-800: #2b2735;
+  --color-ink-900: #1a1722;
+
+  --font-display: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+html {
+  font-family: var(--font-body);
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-ink-50);
+  color: var(--color-ink-800);
+}
+
+#root {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
