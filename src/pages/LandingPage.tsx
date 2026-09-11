@@ -1,8 +1,10 @@
+import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import { api } from '../lib/api'
 import type { TourDTO } from '../types'
 import { TourCard } from '../components/tours/TourCard'
+import { TourBookingModal } from '../components/tours/TourBookingModal'
 import { EmptyState, ErrorState, LoadingState } from '../components/ui/States'
 
 export function LandingPage() {
@@ -15,6 +17,8 @@ export function LandingPage() {
     queryKey: ['tours', 'active'],
     queryFn: () => api.get<TourDTO[]>('/tours/active'),
   })
+
+  const [selectedTour, setSelectedTour] = useState<TourDTO | null>(null)
 
   return (
     <div className="flex-1 bg-ink-50">
@@ -71,7 +75,7 @@ export function LandingPage() {
         {!isLoading && !isError && tours && tours.length > 0 && (
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {tours.map((tour) => (
-              <TourCard key={tour.id} tour={tour} />
+              <TourCard key={tour.id} tour={tour} onClick={() => setSelectedTour(tour)} />
             ))}
           </div>
         )}
@@ -80,6 +84,10 @@ export function LandingPage() {
       <footer className="border-t border-ink-100 bg-white px-6 py-6 text-center text-xs text-ink-400">
         © {new Date().getFullYear()} Corazón Aventurero. Todos los derechos reservados.
       </footer>
+
+      {selectedTour && (
+        <TourBookingModal tour={selectedTour} onClose={() => setSelectedTour(null)} />
+      )}
     </div>
   )
 }

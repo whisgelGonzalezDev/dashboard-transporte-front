@@ -1,0 +1,80 @@
+import { useQuery } from '@tanstack/react-query'
+import { api } from '../../lib/api'
+import type { MetricasDTO } from '../../types'
+import { PageHeader } from '../../components/ui/PageHeader'
+import { ErrorState, LoadingState } from '../../components/ui/States'
+
+const currencyFormatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
+
+function StatCard({ label, value, tone = 'default' }: { label: string; value: string; tone?: 'default' | 'positive' | 'warning' }) {
+  const toneClass =
+    tone === 'positive'
+      ? 'text-jungle-700'
+      : tone === 'warning'
+        ? 'text-adventure-700'
+        : 'text-ink-900'
+  return (
+    <div className="rounded-2xl border border-ink-100 bg-white p-5">
+      <p className="text-xs font-medium uppercase tracking-wide text-ink-400">{label}</p>
+      <p className={`mt-2 font-display text-2xl font-semibold ${toneClass}`}>{value}</p>
+    </div>
+  )
+}
+
+export function MetricsPage() {
+  const { data: metricas, isLoading, isError, refetch } = useQuery({
+    queryKey: ['metricas'],
+    queryFn: () => api.get<MetricasDTO>('/metricas'),
+  })
+
+  return (
+    <div>
+      <PageHeader title="Métricas" description="Un vistazo rápido a la operación." />
+
+      {isLoading && <LoadingState />}
+      {isError && <ErrorState message="No se pudieron cargar las métricas." onRetry={() => refetch()} />}
+
+      {metricas && (
+        <div className="flex flex-col gap-8">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <StatCard label="Ingresos totales" value={currencyFormatter.format(metricas.ingresosTotales)} tone="positive" />
+            <StatCard label="Saldo pendiente" value={currencyFormatter.format(metricas.saldoPendienteTotal)} tone="warning" />
+            <StatCard label="Ocupación promedio" value={`${metricas.ocupacionPromedio}%`} />
+            <StatCard label="Reservas totales" value={String(metricas.reservasTotales)} />
+            <StatCard label="Pasajeros totales" value={String(metricas.pasajerosTotales)} />
+            <StatCard label="Tours activos" value={`${metricas.toursActivos} / ${metricas.toursTotales}`} />
+            <StatCard label="Viajes programados" value={`${metricas.viajesProgramados} / ${metricas.viajesTotales}`} />
+          </div>
+
+          <div>
+            <h3 className="mb-3 font-display text-lg font-semibold text-ink-900">Tours más reservados</h3>
+            {metricas.topTours.length === 0 ? (
+              <p className="text-sm text-ink-400">Todavía no hay reservas para mostrar un ranking.</p>
+            ) : (
+              <div className="overflow-hidden rounded-xl border border-ink-100 bg-white">
+                <table className="w-full text-left text-sm">
+                  <thead>
+                    <tr className="border-b border-ink-100 bg-ink-50 text-xs font-semibold uppercase text-ink-400">
+                      <th className="px-4 py-3">Tour</th>
+                      <th className="px-4 py-3">Reservas</th>
+                      <th className="px-4 py-3">Pasajeros</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {metricas.topTours.map((t) => (
+                      <tr key={t.tourId} className="border-b border-ink-50 last:border-0">
+                        <td className="px-4 py-3 font-medium text-ink-900">{t.titulo}</td>
+                        <td className="px-4 py-3 text-ink-600">{t.reservas}</td>
+                        <td className="px-4 py-3 text-ink-600">{t.pasajeros}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}

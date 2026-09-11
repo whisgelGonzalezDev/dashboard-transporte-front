@@ -4,10 +4,13 @@ import { RolUsuario } from '../../types'
 
 const NAV_ITEMS = [
   { to: '/admin/tours', label: 'Tours', icon: '🏝️' },
-  { to: '/admin/buses', label: 'Buses', icon: '🚌' },
   { to: '/admin/viajes', label: 'Viajes', icon: '🗺️' },
-  { to: '/admin/pasajeros', label: 'Pasajeros', icon: '🧑‍🤝‍🧑' },
+  { to: '/admin/buses', label: 'Buses', icon: '🚌' },
+  { to: '/admin/reservas', label: 'Reservas', icon: '🧾' },
+  { to: '/admin/asientos', label: 'Asientos', icon: '💺' },
   { to: '/admin/usuarios', label: 'Usuarios', icon: '🔐', adminOnly: true },
+  { to: '/admin/metricas', label: 'Métricas', icon: '📊' },
+  { to: '/admin/configuracion', label: 'Configuración', icon: '⚙️' },
 ]
 
 const ROL_LABEL: Record<RolUsuario, string> = {

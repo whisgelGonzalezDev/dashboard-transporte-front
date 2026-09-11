@@ -46,6 +46,7 @@ export type EstadoViaje = (typeof EstadoViaje)[keyof typeof EstadoViaje]
 export interface ViajeDTO {
   id: string
   busId: string
+  tourId: string | null
   rutaOrigen: string
   rutaDestino: string
   fechaSalida: string
@@ -62,6 +63,7 @@ export interface ViajeDTO {
 
 export interface CreateViajeDto {
   busId: string
+  tourId?: string | null
   rutaOrigen: string
   rutaDestino: string
   fechaSalida: string
@@ -99,22 +101,126 @@ export interface PasajeroDTO {
   email: string
   telefono: string
   documento: string
+  reservaId: string
   viajeId: string
-  montoTotal: number
-  abonado: number
-  saldo: number
-  estadoCuenta: EstadoCuenta
+  esPrincipal: boolean
+  numeroAsiento: number | null
   createdAt: string
   updatedAt: string
 }
 
-export interface RegisterPasajeroDto {
+export interface AssignSeatDto {
+  numeroAsiento: number | null
+}
+
+export interface SeatSlotDTO {
+  numero: number
+  ocupado: boolean
+  pasajeroId?: string
+  nombre?: string
+  esPrincipal?: boolean
+  reservaId?: string
+}
+
+export interface PendienteAsientoDTO {
+  pasajeroId: string
+  nombre: string
+  esPrincipal: boolean
+  reservaId: string
+}
+
+export interface SeatMapDTO {
+  viajeId: string
+  busId: string
+  capacidad: number
+  rutaOrigen: string
+  rutaDestino: string
+  fechaSalida: string
+  horaSalida: string
+  asientos: SeatSlotDTO[]
+  sinAsiento: PendienteAsientoDTO[]
+}
+
+export interface SalidaDTO {
+  viajeId: string
+  fechaSalida: string
+  horaSalida: string
+  horaLlegada: string
+  precio: number
+  asientosDisponibles: number
+}
+
+export interface CreatePasajeroGrupoItemDto {
   nombre: string
   email: string
   telefono: string
   documento: string
+  esPrincipal: boolean
+}
+
+export interface CreateReservaDto {
   viajeId: string
+  pasajeros: CreatePasajeroGrupoItemDto[]
   abonoInicial?: number
+}
+
+export interface ReservaPasajeroPrincipalDTO {
+  id: string
+  nombre: string
+  email: string
+  telefono: string
+  documento: string
+}
+
+export interface ReservaDTO {
+  id: string
+  viajeId: string
+  tourId: string | null
+  cantidadPasajeros: number
+  montoTotal: number
+  abonado: number
+  saldo: number
+  estadoCuenta: EstadoCuenta
+  pasajeroPrincipal: ReservaPasajeroPrincipalDTO | null
+  createdAt: string
+  updatedAt: string
+}
+
+export interface ConfiguracionDTO {
+  nombreNegocio: string
+  moneda: string
+  emailContacto: string | null
+  telefonoContacto: string | null
+  porcentajeAbonoMinimo: number | null
+  updatedAt: string
+}
+
+export interface UpdateConfiguracionDto {
+  nombreNegocio?: string
+  moneda?: string
+  emailContacto?: string | null
+  telefonoContacto?: string | null
+  porcentajeAbonoMinimo?: number | null
+}
+
+export interface TopTourDTO {
+  tourId: string
+  titulo: string
+  reservas: number
+  pasajeros: number
+}
+
+export interface MetricasDTO {
+  toursActivos: number
+  toursTotales: number
+  viajesProgramados: number
+  viajesTotales: number
+  reservasTotales: number
+  pasajerosTotales: number
+  ingresosTotales: number
+  saldoPendienteTotal: number
+  ocupacionPromedio: number
+  topTours: TopTourDTO[]
 }
 
 export const RolUsuario = {

@@ -6,9 +6,17 @@ const currencyFormatter = new Intl.NumberFormat('en-US', {
   maximumFractionDigits: 2,
 })
 
-export function TourCard({ tour }: { tour: TourDTO }) {
+export function TourCard({ tour, onClick }: { tour: TourDTO; onClick?: () => void }) {
   return (
-    <article className="group flex flex-col overflow-hidden rounded-2xl border border-ink-100 bg-white shadow-sm transition-shadow hover:shadow-lg">
+    <article
+      onClick={onClick}
+      role={onClick ? 'button' : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      onKeyDown={(e) => {
+        if (onClick && (e.key === 'Enter' || e.key === ' ')) onClick()
+      }}
+      className="group flex flex-col overflow-hidden rounded-2xl border border-ink-100 bg-white shadow-sm transition-shadow hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-adventure-500 cursor-pointer"
+    >
       <div className="relative aspect-[4/3] overflow-hidden bg-ink-100">
         <img
           src={tour.imagenUrl}
@@ -33,7 +41,9 @@ export function TourCard({ tour }: { tour: TourDTO }) {
             <span className="h-1.5 w-1.5 rounded-full bg-jungle-500" />
             Disponible ahora
           </span>
-          <span className="font-semibold text-ink-400">por persona</span>
+          <span className="font-semibold text-adventure-600 group-hover:underline">
+            Reservar →
+          </span>
         </div>
       </div>
     </article>

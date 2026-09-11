@@ -7,8 +7,11 @@ import { AdminLayout } from './components/layout/AdminLayout'
 import { ToursAdminPage } from './pages/admin/ToursAdminPage'
 import { BusesAdminPage } from './pages/admin/BusesAdminPage'
 import { ViajesAdminPage } from './pages/admin/ViajesAdminPage'
-import { PasajerosAdminPage } from './pages/admin/PasajerosAdminPage'
+import { ReservasAdminPage } from './pages/admin/ReservasAdminPage'
+import { SeatMapPage } from './pages/admin/SeatMapPage'
 import { UsuariosAdminPage } from './pages/admin/UsuariosAdminPage'
+import { MetricsPage } from './pages/admin/MetricsPage'
+import { SettingsAdminPage } from './pages/admin/SettingsAdminPage'
 
 function App() {
   return (
@@ -25,8 +28,11 @@ function App() {
               <Route path="tours" element={<ToursAdminPage />} />
               <Route path="buses" element={<BusesAdminPage />} />
               <Route path="viajes" element={<ViajesAdminPage />} />
-              <Route path="pasajeros" element={<PasajerosAdminPage />} />
+              <Route path="reservas" element={<ReservasAdminPage />} />
+              <Route path="asientos" element={<SeatMapPage />} />
               <Route path="usuarios" element={<UsuariosAdminPage />} />
+              <Route path="metricas" element={<MetricsPage />} />
+              <Route path="configuracion" element={<SettingsAdminPage />} />
             </Route>
           </Route>
 

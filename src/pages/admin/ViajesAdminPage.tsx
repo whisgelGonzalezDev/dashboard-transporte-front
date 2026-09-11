@@ -4,6 +4,7 @@ import {
   EstadoViaje,
   type BusDTO,
   type CreateViajeDto,
+  type TourDTO,
   type UpdateViajeDto,
   type ViajeDTO,
 } from '../../types'
@@ -17,6 +18,7 @@ import { Field, inputClass } from '../../components/ui/Field'
 
 const viajeHooks = createResourceHooks<ViajeDTO, CreateViajeDto, UpdateViajeDto>('viajes')
 const busHooks = createResourceHooks<BusDTO, never, never>('buses')
+const tourHooks = createResourceHooks<TourDTO, never, never>('tours')
 
 const currencyFormatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
 
@@ -36,6 +38,7 @@ const ESTADO_BADGE: Record<EstadoViaje, string> = {
 
 interface FormState {
   busId: string
+  tourId: string
   rutaOrigen: string
   rutaDestino: string
   fechaSalida: string
@@ -48,6 +51,7 @@ interface FormState {
 
 const EMPTY_FORM: FormState = {
   busId: '',
+  tourId: '',
   rutaOrigen: '',
   rutaDestino: '',
   fechaSalida: '',
@@ -61,6 +65,7 @@ const EMPTY_FORM: FormState = {
 function toFormState(viaje: ViajeDTO): FormState {
   return {
     busId: viaje.busId,
+    tourId: viaje.tourId ?? '',
     rutaOrigen: viaje.rutaOrigen,
     rutaDestino: viaje.rutaDestino,
     fechaSalida: viaje.fechaSalida?.slice(0, 10) ?? '',
@@ -75,6 +80,7 @@ function toFormState(viaje: ViajeDTO): FormState {
 export function ViajesAdminPage() {
   const { data: viajes, isLoading, isError, refetch } = viajeHooks.useList()
   const { data: buses } = busHooks.useList()
+  const { data: tours } = tourHooks.useList()
   const createViaje = viajeHooks.useCreate()
   const updateViaje = viajeHooks.useUpdate()
   const removeViaje = viajeHooks.useRemove()
@@ -133,6 +139,7 @@ export function ViajesAdminPage() {
       : createViaje.mutateAsync({
           ...base,
           busId: form.busId,
+          tourId: form.tourId || null,
           asientosDisponibles: form.asientosDisponibles
             ? Number(form.asientosDisponibles)
             : undefined,
@@ -151,6 +158,17 @@ export function ViajesAdminPage() {
           {v.rutaOrigen} → {v.rutaDestino}
         </span>
       ),
+    },
+    {
+      header: 'Tour',
+      render: (v) =>
+        v.tourId ? (
+          <span className="text-adventure-700">
+            {tours?.find((t) => t.id === v.tourId)?.titulo ?? '—'}
+          </span>
+        ) : (
+          <span className="text-ink-300">—</span>
+        ),
     },
     { header: 'Salida', render: (v) => `${v.fechaSalida?.slice(0, 10)} · ${v.horaSalida}` },
     { header: 'Precio', render: (v) => currencyFormatter.format(v.precio) },
@@ -226,6 +244,22 @@ export function ViajesAdminPage() {
                 {buses?.map((bus) => (
                   <option key={bus.id} value={bus.id}>
                     {bus.placa} · {bus.modelo}
+                  </option>
+                ))}
+              </select>
+            </Field>
+          )}
+          {!editing && (
+            <Field label="Tour (opcional: convierte este viaje en una salida reservable)">
+              <select
+                className={inputClass}
+                value={form.tourId}
+                onChange={(e) => setForm({ ...form, tourId: e.target.value })}
+              >
+                <option value="">Ninguno (viaje suelto)</option>
+                {tours?.map((tour) => (
+                  <option key={tour.id} value={tour.id}>
+                    {tour.titulo}
                   </option>
                 ))}
               </select>
