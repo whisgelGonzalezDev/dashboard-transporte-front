@@ -27,7 +27,7 @@ export function LandingPage() {
             </span>
           </div>
           <Link
-            to="/admin/tours"
+            to="/login"
             className="text-sm font-medium text-ink-400 hover:text-adventure-600"
           >
             Acceso administrativo
