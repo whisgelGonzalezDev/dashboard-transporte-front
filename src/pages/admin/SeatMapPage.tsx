@@ -2,20 +2,43 @@ import { useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { createResourceHooks } from '../../hooks/useResource'
 import { api, httpClient } from '../../lib/api'
-import type { AssignSeatDto, SeatMapDTO, SeatSlotDTO, ViajeDTO } from '../../types'
+import type { AssignSeatDto, BusDTO, SeatMapDTO, SeatSlotDTO, ViajeDTO } from '../../types'
 import { PageHeader } from '../../components/ui/PageHeader'
 import { Button } from '../../components/ui/Button'
 import { Modal } from '../../components/ui/Modal'
+import { Field } from '../../components/ui/Field'
 import { EmptyState, ErrorState, LoadingState } from '../../components/ui/States'
 
 const viajeHooks = createResourceHooks<ViajeDTO, never, never>('viajes')
+const busHooks = createResourceHooks<BusDTO, never, never>('buses')
 
 export function SeatMapPage() {
   const { data: viajes } = viajeHooks.useList()
+  const { data: buses } = busHooks.useList()
+  const [busId, setBusId] = useState<string>('')
   const [viajeId, setViajeId] = useState<string>('')
   const [assigning, setAssigning] = useState<{ numero: number } | null>(null)
   const [downloading, setDownloading] = useState(false)
   const queryClient = useQueryClient()
+
+  const viajesDelBus = busId ? (viajes?.filter((v) => v.busId === busId) ?? []) : (viajes ?? [])
+  const busSeleccionado = buses?.find((b) => b.id === busId)
+
+  function handleBusChange(nuevoBusId: string) {
+    setBusId(nuevoBusId)
+    // Si el viaje elegido no pertenece al nuevo bus, se limpia para forzar
+    // a elegir uno que sí coincida (viaje y bus siempre van juntos).
+    const viajeActual = viajes?.find((v) => v.id === viajeId)
+    if (nuevoBusId && viajeActual && viajeActual.busId !== nuevoBusId) {
+      setViajeId('')
+    }
+  }
+
+  function handleViajeChange(nuevoViajeId: string) {
+    setViajeId(nuevoViajeId)
+    const viaje = viajes?.find((v) => v.id === nuevoViajeId)
+    if (viaje) setBusId(viaje.busId)
+  }
 
   const {
     data: seatMap,
@@ -78,22 +101,55 @@ export function SeatMapPage() {
         }
       />
 
-      <div className="mb-6 max-w-md">
-        <select
-          className="w-full rounded-lg border border-ink-200 px-3 py-2 text-sm"
-          value={viajeId}
-          onChange={(e) => setViajeId(e.target.value)}
-        >
-          <option value="">Selecciona un viaje…</option>
-          {viajes?.map((v) => (
-            <option key={v.id} value={v.id}>
-              {v.rutaOrigen} → {v.rutaDestino} · {v.fechaSalida?.slice(0, 10)}
-            </option>
-          ))}
-        </select>
+      <div className="mb-6 grid max-w-2xl grid-cols-1 gap-4 sm:grid-cols-2">
+        <Field label="Bus">
+          <select
+            className="w-full rounded-lg border border-ink-200 px-3 py-2 text-sm"
+            value={busId}
+            onChange={(e) => handleBusChange(e.target.value)}
+          >
+            <option value="">Todos los buses…</option>
+            {buses?.map((b) => (
+              <option key={b.id} value={b.id}>
+                {b.placa} · {b.modelo} · {b.capacidad} asientos
+              </option>
+            ))}
+          </select>
+        </Field>
+        <Field label="Viaje">
+          <select
+            className="w-full rounded-lg border border-ink-200 px-3 py-2 text-sm"
+            value={viajeId}
+            onChange={(e) => handleViajeChange(e.target.value)}
+          >
+            <option value="">Selecciona un viaje…</option>
+            {viajesDelBus.map((v) => (
+              <option key={v.id} value={v.id}>
+                {v.rutaOrigen} → {v.rutaDestino} · {v.fechaSalida?.slice(0, 10)}
+              </option>
+            ))}
+          </select>
+        </Field>
       </div>
 
-      {!viajeId && <EmptyState message="Selecciona un viaje para ver su mapa de asientos." />}
+      {busSeleccionado && (
+        <p className="mb-4 text-sm text-ink-500">
+          Bus <strong>{busSeleccionado.placa}</strong> ({busSeleccionado.modelo}) · el mapa se pinta con sus{' '}
+          <strong>{busSeleccionado.capacidad} asientos</strong>.
+        </p>
+      )}
+
+      {!viajeId && (
+        <EmptyState
+          message={
+            busId
+              ? viajesDelBus.length === 0
+                ? 'Este bus no tiene viajes programados.'
+                : 'Selecciona un viaje para ver su mapa de asientos.'
+              : 'Selecciona un bus y un viaje para ver su mapa de asientos.'
+          }
+        />
+      )}
       {viajeId && isLoading && <LoadingState />}
       {viajeId && isError && (
         <ErrorState message="No se pudo cargar el mapa de asientos." onRetry={() => refetch()} />
