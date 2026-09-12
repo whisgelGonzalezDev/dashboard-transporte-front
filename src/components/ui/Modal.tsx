@@ -12,19 +12,19 @@ export function Modal({ open, title, onClose, children }: ModalProps) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-navy-900/50 p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-navy-900/50 p-4 dark:bg-black/70"
       onClick={onClose}
     >
       <div
-        className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl bg-white p-6 shadow-xl"
+        className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl bg-white p-6 shadow-xl dark:bg-navy-900"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="font-display text-lg font-semibold text-navy-900">{title}</h2>
+          <h2 className="font-display text-lg font-semibold text-navy-900 dark:text-ivory">{title}</h2>
           <button
             onClick={onClose}
             aria-label="Cerrar"
-            className="rounded-full p-1 text-navy-400 hover:bg-navy-100 hover:text-navy-700"
+            className="rounded-full p-1 text-navy-400 hover:bg-navy-100 hover:text-navy-700 dark:hover:bg-white/10 dark:hover:text-ivory"
           >
             ✕
           </button>

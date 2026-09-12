@@ -6,6 +6,7 @@ import type { TourDTO } from '../types'
 import { TourCard } from '../components/tours/TourCard'
 import { TourBookingModal } from '../components/tours/TourBookingModal'
 import { EmptyState, ErrorState, LoadingState } from '../components/ui/States'
+import { ThemeToggle } from '../components/ui/ThemeToggle'
 
 export function LandingPage() {
   const {
@@ -21,20 +22,23 @@ export function LandingPage() {
   const [selectedTour, setSelectedTour] = useState<TourDTO | null>(null)
 
   return (
-    <div className="flex-1 bg-navy-50">
-      <header className="border-b border-navy-100 bg-white">
+    <div className="flex-1 bg-navy-50 dark:bg-navy-950">
+      <header className="border-b border-navy-100 bg-white dark:border-white/10 dark:bg-navy-900">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <img
             src="/logo-corazon-aventurero.png"
             alt="Corazón Aventurero"
             className="h-12 w-auto rounded-lg"
           />
-          <Link
-            to="/login"
-            className="text-sm font-medium text-navy-400 hover:text-gold-600"
-          >
-            Acceso administrativo
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link
+              to="/login"
+              className="text-sm font-medium text-navy-400 hover:text-gold-600 dark:text-navy-300 dark:hover:text-gold-400"
+            >
+              Acceso administrativo
+            </Link>
+            <ThemeToggle className="text-navy-500 hover:bg-navy-100 dark:text-navy-300 dark:hover:bg-white/10" />
+          </div>
         </div>
       </header>
 
@@ -61,7 +65,7 @@ export function LandingPage() {
 
       <section className="mx-auto max-w-6xl px-6 py-12">
         <div className="mb-6 flex items-baseline justify-between">
-          <h2 className="font-display text-2xl font-semibold text-navy-900">Tours activos</h2>
+          <h2 className="font-display text-2xl font-semibold text-navy-900 dark:text-ivory">Tours activos</h2>
           {tours && tours.length > 0 && (
             <span className="text-sm text-navy-400">{tours.length} disponibles</span>
           )}
@@ -89,7 +93,7 @@ export function LandingPage() {
         )}
       </section>
 
-      <footer className="border-t border-navy-100 bg-white px-6 py-6 text-center text-xs text-navy-400">
+      <footer className="border-t border-navy-100 bg-white px-6 py-6 text-center text-xs text-navy-400 dark:border-white/10 dark:bg-navy-900">
         © {new Date().getFullYear()} Corazón Aventurero. Todos los derechos reservados.
       </footer>
 

@@ -28,9 +28,9 @@ const ESTADO_LABEL: Record<EstadoCuenta, string> = {
 }
 
 const ESTADO_BADGE: Record<EstadoCuenta, string> = {
-  [EstadoCuenta.PENDIENTE]: 'bg-crimson-100 text-crimson-700',
-  [EstadoCuenta.PARCIAL]: 'bg-gold-100 text-gold-700',
-  [EstadoCuenta.PAGADO]: 'bg-green-100 text-green-700',
+  [EstadoCuenta.PENDIENTE]: 'bg-crimson-100 text-crimson-700 dark:bg-crimson-500/15 dark:text-crimson-300',
+  [EstadoCuenta.PARCIAL]: 'bg-gold-100 text-gold-700 dark:bg-gold-500/15 dark:text-gold-300',
+  [EstadoCuenta.PAGADO]: 'bg-green-100 text-green-700 dark:bg-green-500/15 dark:text-green-400',
 }
 
 export function ReservasAdminPage() {
@@ -65,11 +65,11 @@ export function ReservasAdminPage() {
   }
 
   const columns: Column<ReservaDTO>[] = [
-    { header: 'Viaje', render: (r) => <span className="text-navy-500">{viajeLabel(r.viajeId)}</span> },
+    { header: 'Viaje', render: (r) => <span className="text-navy-500 dark:text-navy-300">{viajeLabel(r.viajeId)}</span> },
     {
       header: 'Contacto principal',
       render: (r) => (
-        <span className="font-medium text-navy-900">{r.pasajeroPrincipal?.nombre ?? '—'}</span>
+        <span className="font-medium text-navy-900 dark:text-ivory">{r.pasajeroPrincipal?.nombre ?? '—'}</span>
       ),
     },
     { header: 'Personas', render: (r) => r.cantidadPasajeros },
@@ -129,7 +129,7 @@ export function ReservasAdminPage() {
 
       <Modal open={!!abonando} title="Registrar abono" onClose={() => setAbonando(null)}>
         <form className="flex flex-col gap-4" onSubmit={handleAbonar}>
-          <p className="text-sm text-navy-500">
+          <p className="text-sm text-navy-500 dark:text-navy-300">
             Saldo pendiente: {abonando && currencyFormatter.format(abonando.saldo)}
           </p>
           <Field label="Monto a abonar (USD)">
@@ -162,16 +162,16 @@ export function ReservasAdminPage() {
             {pasajerosDetalle.map((p) => (
               <li
                 key={p.id}
-                className="flex items-center justify-between rounded-lg border border-navy-100 px-3 py-2"
+                className="flex items-center justify-between rounded-lg border border-navy-100 px-3 py-2 dark:border-white/10"
               >
                 <div>
-                  <span className="font-medium text-navy-900">
+                  <span className="font-medium text-navy-900 dark:text-ivory">
                     {p.esPrincipal && '★ '}
                     {p.nombre}
                   </span>
                   <p className="text-xs text-navy-400">{p.documento} · {p.email}</p>
                 </div>
-                <span className="text-xs text-navy-500">
+                <span className="text-xs text-navy-500 dark:text-navy-300">
                   {p.numeroAsiento ? `Asiento ${p.numeroAsiento}` : 'Sin asiento'}
                 </span>
               </li>

@@ -83,10 +83,10 @@ export function SeatMapPage() {
   function seatClasses(seat: SeatSlotDTO) {
     if (seat.ocupado) {
       return seat.esPrincipal
-        ? 'bg-gold-100 border-gold-300 text-gold-800'
-        : 'bg-navy-100 border-navy-300 text-navy-800'
+        ? 'bg-gold-100 border-gold-300 text-gold-800 dark:bg-gold-500/15 dark:border-gold-700 dark:text-gold-300'
+        : 'bg-navy-100 border-navy-300 text-navy-800 dark:bg-white/10 dark:border-navy-600 dark:text-navy-100'
     }
-    return 'bg-white border-navy-200 text-navy-400 hover:border-gold-300'
+    return 'bg-white border-navy-200 text-navy-400 hover:border-gold-300 dark:bg-navy-900 dark:border-navy-700 dark:hover:border-gold-500'
   }
 
   return (
@@ -104,7 +104,7 @@ export function SeatMapPage() {
       <div className="mb-6 grid max-w-2xl grid-cols-1 gap-4 sm:grid-cols-2">
         <Field label="Bus">
           <select
-            className="w-full rounded-lg border border-navy-200 px-3 py-2 text-sm"
+            className="w-full rounded-lg border border-navy-200 px-3 py-2 text-sm dark:border-navy-700 dark:bg-navy-900 dark:text-ivory"
             value={busId}
             onChange={(e) => handleBusChange(e.target.value)}
           >
@@ -118,7 +118,7 @@ export function SeatMapPage() {
         </Field>
         <Field label="Viaje">
           <select
-            className="w-full rounded-lg border border-navy-200 px-3 py-2 text-sm"
+            className="w-full rounded-lg border border-navy-200 px-3 py-2 text-sm dark:border-navy-700 dark:bg-navy-900 dark:text-ivory"
             value={viajeId}
             onChange={(e) => handleViajeChange(e.target.value)}
           >
@@ -133,7 +133,7 @@ export function SeatMapPage() {
       </div>
 
       {busSeleccionado && (
-        <p className="mb-4 text-sm text-navy-500">
+        <p className="mb-4 text-sm text-navy-500 dark:text-navy-300">
           Bus <strong>{busSeleccionado.placa}</strong> ({busSeleccionado.modelo}) · el mapa se pinta con sus{' '}
           <strong>{busSeleccionado.capacidad} asientos</strong>.
         </p>
@@ -157,7 +157,7 @@ export function SeatMapPage() {
 
       {seatMap && (
         <div className="flex flex-col gap-6">
-          <div className="flex items-center gap-4 text-sm text-navy-500">
+          <div className="flex items-center gap-4 text-sm text-navy-500 dark:text-navy-300">
             <span>
               {seatMap.rutaOrigen} → {seatMap.rutaDestino}
             </span>
@@ -189,14 +189,14 @@ export function SeatMapPage() {
 
           {seatMap.sinAsiento.length > 0 && (
             <div>
-              <h3 className="mb-2 font-display text-sm font-semibold text-navy-900">
+              <h3 className="mb-2 font-display text-sm font-semibold text-navy-900 dark:text-ivory">
                 Pendientes de asiento ({seatMap.sinAsiento.length})
               </h3>
               <ul className="flex flex-wrap gap-2">
                 {seatMap.sinAsiento.map((p) => (
                   <li
                     key={p.pasajeroId}
-                    className="rounded-full bg-navy-100 px-3 py-1 text-xs text-navy-600"
+                    className="rounded-full bg-navy-100 px-3 py-1 text-xs text-navy-600 dark:bg-white/10 dark:text-navy-200"
                   >
                     {p.esPrincipal && '★ '}
                     {p.nombre}
@@ -214,7 +214,7 @@ export function SeatMapPage() {
         onClose={() => setAssigning(null)}
       >
         {seatMap && seatMap.sinAsiento.length === 0 && (
-          <p className="text-sm text-navy-500">No hay pasajeros pendientes de asiento en este viaje.</p>
+          <p className="text-sm text-navy-500 dark:text-navy-300">No hay pasajeros pendientes de asiento en este viaje.</p>
         )}
         {seatMap && seatMap.sinAsiento.length > 0 && (
           <ul className="flex flex-col gap-2">
@@ -226,7 +226,7 @@ export function SeatMapPage() {
                     assignSeat.mutate({ pasajeroId: p.pasajeroId, numeroAsiento: assigning.numero })
                   }
                   disabled={assignSeat.isPending}
-                  className="w-full rounded-lg border border-navy-100 px-3 py-2 text-left text-sm hover:bg-navy-50"
+                  className="w-full rounded-lg border border-navy-100 px-3 py-2 text-left text-sm hover:bg-navy-50 dark:border-white/10 dark:hover:bg-white/5"
                 >
                   {p.esPrincipal && '★ '}
                   {p.nombre}

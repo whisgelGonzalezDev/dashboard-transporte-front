@@ -1,6 +1,7 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../lib/AuthContext'
 import { RolUsuario } from '../../types'
+import { ThemeToggle } from '../ui/ThemeToggle'
 
 const NAV_ITEMS = [
   { to: '/admin/tours', label: 'Tours', icon: '🏝️' },
@@ -31,7 +32,7 @@ export function AdminLayout() {
   const items = NAV_ITEMS.filter((item) => !item.adminOnly || user?.rol === RolUsuario.ADMIN)
 
   return (
-    <div className="flex min-h-screen bg-navy-50">
+    <div className="flex min-h-screen bg-navy-50 dark:bg-navy-950">
       <aside className="flex w-64 shrink-0 flex-col bg-navy-900">
         <div className="flex items-center gap-3 px-5 py-5">
           <img
@@ -40,6 +41,7 @@ export function AdminLayout() {
             className="h-11 w-auto rounded-md"
           />
           <p className="text-xs font-medium text-navy-300">Panel administrativo</p>
+          <ThemeToggle className="ml-auto text-navy-300 hover:bg-white/5 hover:text-ivory" />
         </div>
         <nav className="flex flex-1 flex-col gap-1 px-3 pt-2">
           {items.map((item) => (

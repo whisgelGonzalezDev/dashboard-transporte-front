@@ -80,7 +80,7 @@ export function SettingsAdminPage() {
 
       {form && (
         <form
-          className="flex max-w-lg flex-col gap-4 rounded-2xl border border-navy-100 bg-white p-6"
+          className="flex max-w-lg flex-col gap-4 rounded-2xl border border-navy-100 bg-white p-6 dark:border-white/10 dark:bg-navy-900"
           onSubmit={handleSubmit}
         >
           <Field label="Nombre del negocio">
@@ -130,8 +130,8 @@ export function SettingsAdminPage() {
             />
           </Field>
 
-          {error && <p className="text-sm text-crimson-600">{error}</p>}
-          {success && <p className="text-sm text-green-600">Guardado correctamente.</p>}
+          {error && <p className="text-sm text-crimson-600 dark:text-crimson-400">{error}</p>}
+          {success && <p className="text-sm text-green-600 dark:text-green-400">Guardado correctamente.</p>}
 
           <div className="mt-2 flex justify-end">
             <Button type="submit" disabled={update.isPending}>

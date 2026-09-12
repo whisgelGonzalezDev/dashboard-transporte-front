@@ -98,7 +98,7 @@ export function ToursAdminPage() {
             className="h-10 w-14 rounded-md object-cover"
             onError={(e) => (e.currentTarget.style.visibility = 'hidden')}
           />
-          <span className="font-medium text-navy-900">{t.titulo}</span>
+          <span className="font-medium text-navy-900 dark:text-ivory">{t.titulo}</span>
         </div>
       ),
     },
@@ -112,7 +112,9 @@ export function ToursAdminPage() {
       render: (t) => (
         <span
           className={`rounded-full px-2 py-0.5 text-xs font-semibold ${
-            t.activo ? 'bg-green-100 text-green-700' : 'bg-navy-100 text-navy-500'
+            t.activo
+              ? 'bg-green-100 text-green-700 dark:bg-green-500/15 dark:text-green-400'
+              : 'bg-navy-100 text-navy-500 dark:bg-white/10 dark:text-navy-300'
           }`}
         >
           {t.activo ? 'Activo' : 'Inactivo'}
@@ -204,7 +206,7 @@ export function ToursAdminPage() {
             />
           </Field>
 
-          {formError && <p className="text-sm text-crimson-600">{formError}</p>}
+          {formError && <p className="text-sm text-crimson-600 dark:text-crimson-400">{formError}</p>}
 
           <div className="mt-2 flex justify-end gap-3">
             <Button variant="secondary" type="button" onClick={() => setFormOpen(false)}>

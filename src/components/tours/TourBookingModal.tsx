@@ -111,24 +111,24 @@ export function TourBookingModal({ tour, onClose }: { tour: TourDTO; onClose: ()
       {isLoading && <LoadingState label="Buscando fechas disponibles…" />}
 
       {isError && (
-        <p className="text-sm text-crimson-600">
+        <p className="text-sm text-crimson-600 dark:text-crimson-400">
           No pudimos cargar las fechas disponibles. Intenta de nuevo más tarde.
         </p>
       )}
 
       {!isLoading && !isError && salidas && salidas.length === 0 && !reserva && (
-        <p className="text-sm text-navy-500">
+        <p className="text-sm text-navy-500 dark:text-navy-300">
           Este tour no tiene salidas disponibles por el momento. Vuelve a intentarlo pronto.
         </p>
       )}
 
       {reserva && (
         <div className="flex flex-col gap-4">
-          <p className="text-sm text-navy-600">
+          <p className="text-sm text-navy-600 dark:text-navy-300">
             Tu grupo de <strong>{reserva.cantidadPasajeros}</strong> persona(s) quedó reservado para{' '}
             <strong>{tour.titulo}</strong>.
           </p>
-          <div className="rounded-xl bg-green-50 p-4 text-sm text-green-800">
+          <div className="rounded-xl bg-green-50 p-4 text-sm text-green-800 dark:bg-green-500/10 dark:text-green-300">
             <div className="flex justify-between">
               <span>Monto total</span>
               <strong>{currencyFormatter.format(reserva.montoTotal)}</strong>
@@ -142,7 +142,7 @@ export function TourBookingModal({ tour, onClose }: { tour: TourDTO; onClose: ()
               <strong>{currencyFormatter.format(reserva.saldo)}</strong>
             </div>
           </div>
-          <p className="text-xs text-navy-400">
+          <p className="text-xs text-navy-400 dark:text-navy-400">
             Código de reserva: <span className="font-mono">{reserva.id}</span>
           </p>
           <Button onClick={onClose}>Listo</Button>
@@ -168,7 +168,7 @@ export function TourBookingModal({ tour, onClose }: { tour: TourDTO; onClose: ()
 
           <div className="flex flex-col gap-3">
             <div className="flex items-center justify-between">
-              <span className="text-sm font-medium text-navy-700">Pasajeros del grupo</span>
+              <span className="text-sm font-medium text-navy-700 dark:text-navy-200">Pasajeros del grupo</span>
               <Button
                 type="button"
                 variant="secondary"
@@ -180,9 +180,9 @@ export function TourBookingModal({ tour, onClose }: { tour: TourDTO; onClose: ()
             </div>
 
             {pasajeros.map((p, index) => (
-              <div key={index} className="rounded-xl border border-navy-100 p-3">
+              <div key={index} className="rounded-xl border border-navy-100 p-3 dark:border-white/10">
                 <div className="mb-2 flex items-center justify-between">
-                  <label className="flex items-center gap-2 text-xs font-medium text-navy-500">
+                  <label className="flex items-center gap-2 text-xs font-medium text-navy-500 dark:text-navy-300">
                     <input
                       type="radio"
                       name="principal"
@@ -195,7 +195,7 @@ export function TourBookingModal({ tour, onClose }: { tour: TourDTO; onClose: ()
                     <button
                       type="button"
                       onClick={() => removePasajero(index)}
-                      className="text-xs font-medium text-crimson-500 hover:underline"
+                      className="text-xs font-medium text-crimson-500 hover:underline dark:text-crimson-400"
                     >
                       Quitar
                     </button>
@@ -248,12 +248,12 @@ export function TourBookingModal({ tour, onClose }: { tour: TourDTO; onClose: ()
             />
           </Field>
 
-          <div className="flex justify-between rounded-xl bg-gold-50 p-3 text-sm text-gold-800">
+          <div className="flex justify-between rounded-xl bg-gold-50 p-3 text-sm text-gold-800 dark:bg-gold-500/10 dark:text-gold-300">
             <span>Total ({cantidad} persona{cantidad > 1 ? 's' : ''})</span>
             <strong>{currencyFormatter.format(montoTotal)}</strong>
           </div>
 
-          {formError && <p className="text-sm text-crimson-600">{formError}</p>}
+          {formError && <p className="text-sm text-crimson-600 dark:text-crimson-400">{formError}</p>}
 
           <div className="flex justify-end gap-3">
             <Button type="button" variant="secondary" onClick={onClose}>

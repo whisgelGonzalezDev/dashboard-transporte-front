@@ -15,9 +15,9 @@ export function TourCard({ tour, onClick }: { tour: TourDTO; onClick?: () => voi
       onKeyDown={(e) => {
         if (onClick && (e.key === 'Enter' || e.key === ' ')) onClick()
       }}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-navy-100 bg-white shadow-sm transition-shadow hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-500 cursor-pointer"
+      className="group flex flex-col overflow-hidden rounded-2xl border border-navy-100 bg-white shadow-sm transition-shadow hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-500 cursor-pointer dark:border-white/10 dark:bg-navy-900"
     >
-      <div className="relative aspect-[4/3] overflow-hidden bg-navy-100">
+      <div className="relative aspect-[4/3] overflow-hidden bg-navy-100 dark:bg-navy-800">
         <img
           src={tour.imagenUrl}
           alt={tour.titulo}
@@ -32,11 +32,11 @@ export function TourCard({ tour, onClick }: { tour: TourDTO; onClick?: () => voi
         </span>
       </div>
       <div className="flex flex-1 flex-col gap-2 p-5">
-        <h3 className="font-display text-lg font-semibold text-navy-900">{tour.titulo}</h3>
-        <p className="line-clamp-3 flex-1 text-sm leading-relaxed text-navy-500">
+        <h3 className="font-display text-lg font-semibold text-navy-900 dark:text-ivory">{tour.titulo}</h3>
+        <p className="line-clamp-3 flex-1 text-sm leading-relaxed text-navy-500 dark:text-navy-300">
           {tour.descripcion}
         </p>
-        <div className="mt-3 flex items-center justify-between text-xs text-green-700">
+        <div className="mt-3 flex items-center justify-between text-xs text-green-700 dark:text-green-400">
           <span className="inline-flex items-center gap-1 font-medium">
             <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
             Disponible ahora

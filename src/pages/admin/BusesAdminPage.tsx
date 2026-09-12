@@ -107,7 +107,7 @@ export function BusesAdminPage() {
   }
 
   const columns: Column<BusDTO>[] = [
-    { header: 'Placa', render: (b) => <span className="font-medium text-navy-900">{b.placa}</span> },
+    { header: 'Placa', render: (b) => <span className="font-medium text-navy-900 dark:text-ivory">{b.placa}</span> },
     { header: 'Modelo', render: (b) => b.modelo },
     { header: 'Año', render: (b) => b.anio },
     { header: 'Capacidad', render: (b) => `${b.capacidad} asientos` },
@@ -117,10 +117,10 @@ export function BusesAdminPage() {
         <span
           className={`rounded-full px-2 py-0.5 text-xs font-semibold ${
             b.estado === EstadoBus.ACTIVO
-              ? 'bg-green-100 text-green-700'
+              ? 'bg-green-100 text-green-700 dark:bg-green-500/15 dark:text-green-400'
               : b.estado === EstadoBus.MANTENIMIENTO
-                ? 'bg-gold-100 text-gold-700'
-                : 'bg-navy-100 text-navy-500'
+                ? 'bg-gold-100 text-gold-700 dark:bg-gold-500/15 dark:text-gold-300'
+                : 'bg-navy-100 text-navy-500 dark:bg-white/10 dark:text-navy-300'
           }`}
         >
           {ESTADO_LABEL[b.estado]}
@@ -227,7 +227,7 @@ export function BusesAdminPage() {
             </Field>
           )}
 
-          {formError && <p className="text-sm text-crimson-600">{formError}</p>}
+          {formError && <p className="text-sm text-crimson-600 dark:text-crimson-400">{formError}</p>}
 
           <div className="mt-2 flex justify-end gap-3">
             <Button variant="secondary" type="button" onClick={() => setFormOpen(false)}>
