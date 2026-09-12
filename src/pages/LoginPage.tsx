@@ -31,11 +31,12 @@ export function LoginPage() {
   return (
     <div className="flex flex-1 items-center justify-center bg-navy-50 px-4">
       <div className="w-full max-w-sm rounded-2xl border border-navy-100 bg-white p-8 shadow-sm">
-        <div className="mb-6 flex flex-col items-center gap-2 text-center">
-          <span className="text-3xl">🌋</span>
-          <h1 className="font-display text-xl font-semibold text-navy-900">
-            Corazón Aventurero
-          </h1>
+        <div className="mb-6 flex flex-col items-center gap-3 text-center">
+          <img
+            src="/logo-corazon-aventurero.png"
+            alt="Corazón Aventurero"
+            className="h-16 w-auto rounded-lg"
+          />
           <p className="text-sm text-navy-400">Acceso al panel administrativo</p>
         </div>
 

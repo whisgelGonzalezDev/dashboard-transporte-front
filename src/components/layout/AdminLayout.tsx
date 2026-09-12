@@ -32,15 +32,16 @@ export function AdminLayout() {
 
   return (
     <div className="flex min-h-screen bg-navy-50">
-      <aside className="flex w-64 shrink-0 flex-col border-r border-navy-100 bg-white">
-        <div className="flex items-center gap-2 px-6 py-5">
-          <span className="text-2xl">🌋</span>
-          <div>
-            <p className="font-display text-sm font-semibold text-navy-900">Corazón Aventurero</p>
-            <p className="text-xs text-navy-400">Panel administrativo</p>
-          </div>
+      <aside className="flex w-64 shrink-0 flex-col bg-navy-900">
+        <div className="flex items-center gap-3 px-5 py-5">
+          <img
+            src="/logo-corazon-aventurero.png"
+            alt="Corazón Aventurero"
+            className="h-11 w-auto rounded-md"
+          />
+          <p className="text-xs font-medium text-navy-300">Panel administrativo</p>
         </div>
-        <nav className="flex flex-1 flex-col gap-1 px-3">
+        <nav className="flex flex-1 flex-col gap-1 px-3 pt-2">
           {items.map((item) => (
             <NavLink
               key={item.to}
@@ -48,8 +49,8 @@ export function AdminLayout() {
               className={({ isActive }) =>
                 `flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
                   isActive
-                    ? 'bg-gold-50 text-gold-700'
-                    : 'text-navy-600 hover:bg-navy-50 hover:text-navy-900'
+                    ? 'bg-gold-500/15 text-gold-400'
+                    : 'text-navy-300 hover:bg-white/5 hover:text-ivory'
                 }`
               }
             >
@@ -58,23 +59,23 @@ export function AdminLayout() {
             </NavLink>
           ))}
         </nav>
-        <div className="border-t border-navy-100 p-3">
+        <div className="border-t border-white/10 p-3">
           {user && (
             <div className="mb-1 px-3 py-2">
-              <p className="truncate text-sm font-medium text-navy-800">{user.nombre}</p>
+              <p className="truncate text-sm font-medium text-ivory">{user.nombre}</p>
               <p className="text-xs text-navy-400">{ROL_LABEL[user.rol]}</p>
             </div>
           )}
           <NavLink
             to="/"
-            className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-gold-700 hover:bg-gold-50"
+            className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-gold-400 hover:bg-white/5"
           >
             <span aria-hidden>↩️</span>
             Ver landing pública
           </NavLink>
           <button
             onClick={handleLogout}
-            className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-sm font-medium text-navy-500 hover:bg-navy-50 hover:text-crimson-600"
+            className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-sm font-medium text-navy-300 hover:bg-white/5 hover:text-crimson-400"
           >
             <span aria-hidden>🚪</span>
             Cerrar sesión

@@ -24,12 +24,11 @@ export function LandingPage() {
     <div className="flex-1 bg-navy-50">
       <header className="border-b border-navy-100 bg-white">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <div className="flex items-center gap-2">
-            <span className="text-2xl">🌋</span>
-            <span className="font-display text-lg font-semibold text-navy-900">
-              Corazón Aventurero
-            </span>
-          </div>
+          <img
+            src="/logo-corazon-aventurero.png"
+            alt="Corazón Aventurero"
+            className="h-12 w-auto rounded-lg"
+          />
           <Link
             to="/login"
             className="text-sm font-medium text-navy-400 hover:text-gold-600"
