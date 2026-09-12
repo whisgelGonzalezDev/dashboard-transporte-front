@@ -2,6 +2,8 @@ import { useRef, useState, type ChangeEvent } from 'react'
 import { ApiError, uploadImage } from '../../lib/api'
 import { Field, inputClass } from './Field'
 import { Button } from './Button'
+import { Modal } from './Modal'
+import { ImageGallery } from './ImageGallery'
 
 interface ImageUploadFieldProps {
   label: string
@@ -12,6 +14,7 @@ interface ImageUploadFieldProps {
 export function ImageUploadField({ label, value, onChange }: ImageUploadFieldProps) {
   const [uploading, setUploading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [galleryOpen, setGalleryOpen] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   async function handleFileChange(e: ChangeEvent<HTMLInputElement>) {
@@ -62,6 +65,9 @@ export function ImageUploadField({ label, value, onChange }: ImageUploadFieldPro
           >
             {uploading ? 'Subiendo…' : 'Subir'}
           </Button>
+          <Button type="button" variant="secondary" onClick={() => setGalleryOpen(true)}>
+            Galería
+          </Button>
         </div>
         <input
           ref={fileInputRef}
@@ -72,6 +78,16 @@ export function ImageUploadField({ label, value, onChange }: ImageUploadFieldPro
         />
         {error && <p className="text-xs text-crimson-600 dark:text-crimson-400">{error}</p>}
       </div>
+
+      <Modal open={galleryOpen} title="Elegir imagen de la galería" onClose={() => setGalleryOpen(false)}>
+        <ImageGallery
+          mode="picker"
+          onSelect={(url) => {
+            onChange(url)
+            setGalleryOpen(false)
+          }}
+        />
+      </Modal>
     </Field>
   )
 }

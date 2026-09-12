@@ -12,6 +12,7 @@ import { SeatMapPage } from './pages/admin/SeatMapPage'
 import { UsuariosAdminPage } from './pages/admin/UsuariosAdminPage'
 import { MetricsPage } from './pages/admin/MetricsPage'
 import { SettingsAdminPage } from './pages/admin/SettingsAdminPage'
+import { GalleryAdminPage } from './pages/admin/GalleryAdminPage'
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<Navigate to="tours" replace />} />
               <Route path="tours" element={<ToursAdminPage />} />
+              <Route path="galeria" element={<GalleryAdminPage />} />
               <Route path="buses" element={<BusesAdminPage />} />
               <Route path="viajes" element={<ViajesAdminPage />} />
               <Route path="reservas" element={<ReservasAdminPage />} />

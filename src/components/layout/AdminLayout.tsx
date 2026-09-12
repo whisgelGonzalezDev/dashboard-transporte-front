@@ -5,6 +5,7 @@ import { ThemeToggle } from '../ui/ThemeToggle'
 
 const NAV_ITEMS = [
   { to: '/admin/tours', label: 'Tours', icon: '🏝️' },
+  { to: '/admin/galeria', label: 'Galería', icon: '🖼️' },
   { to: '/admin/viajes', label: 'Viajes', icon: '🗺️' },
   { to: '/admin/buses', label: 'Buses', icon: '🚌' },
   { to: '/admin/reservas', label: 'Reservas', icon: '🧾' },

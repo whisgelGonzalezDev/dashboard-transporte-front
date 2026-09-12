@@ -286,6 +286,13 @@ export interface UpdateTourDto {
   imagenUrl?: string
 }
 
+export interface StoredImageDTO {
+  name: string
+  url: string
+  size: number
+  createdAt: string
+}
+
 /** Cuerpo uniforme de error que devuelve el backend (toHttpException). */
 export interface ApiErrorBody {
   ok: false
