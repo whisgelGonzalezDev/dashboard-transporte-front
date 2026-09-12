@@ -35,7 +35,7 @@ export function LoginPage() {
       <div className="w-full max-w-sm rounded-2xl border border-navy-100 bg-white p-8 shadow-sm dark:border-white/10 dark:bg-navy-900">
         <div className="mb-6 flex flex-col items-center gap-3 text-center">
           <img
-            src="/logo-corazon-aventurero.png"
+            src={`${import.meta.env.BASE_URL}logo-corazon-aventurero.png`}
             alt="Corazón Aventurero"
             className="h-16 w-auto rounded-lg"
           />

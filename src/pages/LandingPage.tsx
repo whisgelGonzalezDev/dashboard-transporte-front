@@ -26,7 +26,7 @@ export function LandingPage() {
       <header className="border-b border-navy-100 bg-white dark:border-white/10 dark:bg-navy-900">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <img
-            src="/logo-corazon-aventurero.png"
+            src={`${import.meta.env.BASE_URL}logo-corazon-aventurero.png`}
             alt="Corazón Aventurero"
             className="h-12 w-auto rounded-lg"
           />

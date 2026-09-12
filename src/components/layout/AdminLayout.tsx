@@ -36,7 +36,7 @@ export function AdminLayout() {
       <aside className="flex w-64 shrink-0 flex-col bg-navy-900">
         <div className="flex items-center gap-3 px-5 py-5">
           <img
-            src="/logo-corazon-aventurero.png"
+            src={`${import.meta.env.BASE_URL}logo-corazon-aventurero.png`}
             alt="Corazón Aventurero"
             className="h-11 w-auto rounded-md"
           />
