@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Solo se lista la raíz: el sitio es una SPA con HashRouter (rutas tipo #/terminos),
+  y los crawlers no indexan fragmentos de URL, así que las subrutas no son
+  listables en un sitemap tradicional. Es la limitación aceptada del enfoque
+  "SEO básico en cliente" sin pre-renderizado ni SSR.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://whisgelgonzalezdev.github.io/dashboard-transporte-front/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>

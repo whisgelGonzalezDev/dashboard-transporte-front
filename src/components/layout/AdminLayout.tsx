@@ -1,11 +1,13 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../lib/AuthContext'
+import { useIdleLogout } from '../../hooks/useIdleLogout'
 import { RolUsuario } from '../../types'
 import { ThemeToggle } from '../ui/ThemeToggle'
 
 const NAV_ITEMS = [
   { to: '/admin/tours', label: 'Tours', icon: '🏝️' },
   { to: '/admin/galeria', label: 'Galería', icon: '🖼️' },
+  { to: '/admin/sitio-web', label: 'Sitio web', icon: '🌐' },
   { to: '/admin/viajes', label: 'Viajes', icon: '🗺️' },
   { to: '/admin/buses', label: 'Buses', icon: '🚌' },
   { to: '/admin/reservas', label: 'Reservas', icon: '🧾' },
@@ -24,6 +26,7 @@ const ROL_LABEL: Record<RolUsuario, string> = {
 export function AdminLayout() {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
+  useIdleLogout()
 
   function handleLogout() {
     logout()

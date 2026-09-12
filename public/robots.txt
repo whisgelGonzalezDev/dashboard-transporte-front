@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://whisgelgonzalezdev.github.io/dashboard-transporte-front/sitemap.xml

@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, type ReactNode } from 'react'
 import { api, ApiError } from './api'
 import { clearSession, getStoredUser, getToken, setSession, type StoredUser } from './auth'
+import { clearActivity } from './idleSession'
 
 interface LoginResponse {
   accessToken: string
@@ -40,6 +41,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   function logout() {
     clearSession()
+    clearActivity()
     setUser(null)
   }
 

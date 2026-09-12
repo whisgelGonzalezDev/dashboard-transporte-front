@@ -193,6 +193,14 @@ export interface ConfiguracionDTO {
   emailContacto: string | null
   telefonoContacto: string | null
   porcentajeAbonoMinimo: number | null
+  sobreNosotros: string | null
+  terminosCondiciones: string | null
+  contactoEventosNombre: string | null
+  contactoEventosEmail: string | null
+  contactoEventosTelefono: string | null
+  seoTitulo: string | null
+  seoDescripcion: string | null
+  seoPalabrasClave: string | null
   updatedAt: string
 }
 
@@ -202,6 +210,27 @@ export interface UpdateConfiguracionDto {
   emailContacto?: string | null
   telefonoContacto?: string | null
   porcentajeAbonoMinimo?: number | null
+  sobreNosotros?: string | null
+  terminosCondiciones?: string | null
+  contactoEventosNombre?: string | null
+  contactoEventosEmail?: string | null
+  contactoEventosTelefono?: string | null
+  seoTitulo?: string | null
+  seoDescripcion?: string | null
+  seoPalabrasClave?: string | null
+}
+
+/** Subconjunto de ConfiguracionDTO seguro para la landing pública (sin auth). */
+export interface PublicConfiguracionDTO {
+  nombreNegocio: string
+  sobreNosotros: string | null
+  terminosCondiciones: string | null
+  contactoEventosNombre: string | null
+  contactoEventosEmail: string | null
+  contactoEventosTelefono: string | null
+  seoTitulo: string | null
+  seoDescripcion: string | null
+  seoPalabrasClave: string | null
 }
 
 export interface TopTourDTO {

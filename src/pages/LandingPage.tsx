@@ -1,12 +1,16 @@
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { Link } from 'react-router-dom'
 import { api } from '../lib/api'
-import type { TourDTO } from '../types'
+import type { PublicConfiguracionDTO, TourDTO } from '../types'
 import { TourCard } from '../components/tours/TourCard'
 import { TourBookingModal } from '../components/tours/TourBookingModal'
 import { EmptyState, ErrorState, LoadingState } from '../components/ui/States'
-import { ThemeToggle } from '../components/ui/ThemeToggle'
+import { PublicLayout } from '../components/layout/PublicLayout'
+import { useSeo } from '../hooks/useSeo'
+
+const DEFAULT_SEO_TITLE = 'Corazón Aventurero · Tours y aventuras'
+const DEFAULT_SEO_DESCRIPTION =
+  'Explora nuestros tours activos: naturaleza, playa y cultura en un solo lugar. Cupos limitados, guías locales y transporte incluido.'
 
 export function LandingPage() {
   const {
@@ -19,29 +23,21 @@ export function LandingPage() {
     queryFn: () => api.get<TourDTO[]>('/tours/active'),
   })
 
+  const { data: config } = useQuery({
+    queryKey: ['configuracion', 'publica'],
+    queryFn: () => api.get<PublicConfiguracionDTO>('/configuracion/publica'),
+  })
+
+  useSeo({
+    title: config?.seoTitulo || DEFAULT_SEO_TITLE,
+    description: config?.seoDescripcion || DEFAULT_SEO_DESCRIPTION,
+    keywords: config?.seoPalabrasClave,
+  })
+
   const [selectedTour, setSelectedTour] = useState<TourDTO | null>(null)
 
   return (
-    <div className="flex-1 bg-navy-50 dark:bg-navy-950">
-      <header className="border-b border-navy-100 bg-white dark:border-white/10 dark:bg-navy-900">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <img
-            src={`${import.meta.env.BASE_URL}logo-corazon-aventurero.png`}
-            alt="Corazón Aventurero"
-            className="h-12 w-auto rounded-lg"
-          />
-          <div className="flex items-center gap-2">
-            <Link
-              to="/login"
-              className="text-sm font-medium text-navy-400 hover:text-gold-600 dark:text-navy-300 dark:hover:text-gold-400"
-            >
-              Acceso administrativo
-            </Link>
-            <ThemeToggle className="text-navy-500 hover:bg-navy-100 dark:text-navy-300 dark:hover:bg-white/10" />
-          </div>
-        </div>
-      </header>
-
+    <PublicLayout>
       <section
         className="relative overflow-hidden px-6 py-20 text-white"
         style={{
@@ -93,13 +89,9 @@ export function LandingPage() {
         )}
       </section>
 
-      <footer className="border-t border-navy-100 bg-white px-6 py-6 text-center text-xs text-navy-400 dark:border-white/10 dark:bg-navy-900">
-        © {new Date().getFullYear()} Corazón Aventurero. Todos los derechos reservados.
-      </footer>
-
       {selectedTour && (
         <TourBookingModal tour={selectedTour} onClose={() => setSelectedTour(null)} />
       )}
-    </div>
+    </PublicLayout>
   )
 }
