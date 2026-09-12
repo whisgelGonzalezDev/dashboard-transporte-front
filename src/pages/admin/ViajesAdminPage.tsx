@@ -131,6 +131,7 @@ export function ViajesAdminPage() {
           id: editing.id,
           dto: {
             ...base,
+            busId: form.busId,
             asientosDisponibles: form.asientosDisponibles
               ? Number(form.asientosDisponibles)
               : undefined,
@@ -157,6 +158,12 @@ export function ViajesAdminPage() {
         <span className="font-medium text-ink-900">
           {v.rutaOrigen} → {v.rutaDestino}
         </span>
+      ),
+    },
+    {
+      header: 'Bus',
+      render: (v) => (
+        <span className="text-ink-600">{buses?.find((b) => b.id === v.busId)?.placa ?? '—'}</span>
       ),
     },
     {
@@ -230,25 +237,23 @@ export function ViajesAdminPage() {
 
       <Modal open={formOpen} title={editing ? 'Editar viaje' : 'Nuevo viaje'} onClose={() => setFormOpen(false)}>
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-          {!editing && (
-            <Field label="Bus">
-              <select
-                className={inputClass}
-                value={form.busId}
-                onChange={(e) => setForm({ ...form, busId: e.target.value })}
-                required
-              >
-                <option value="" disabled>
-                  Selecciona un bus…
+          <Field label="Bus">
+            <select
+              className={inputClass}
+              value={form.busId}
+              onChange={(e) => setForm({ ...form, busId: e.target.value })}
+              required
+            >
+              <option value="" disabled>
+                Selecciona un bus…
+              </option>
+              {buses?.map((bus) => (
+                <option key={bus.id} value={bus.id}>
+                  {bus.placa} · {bus.modelo} · {bus.capacidad} asientos
                 </option>
-                {buses?.map((bus) => (
-                  <option key={bus.id} value={bus.id}>
-                    {bus.placa} · {bus.modelo}
-                  </option>
-                ))}
-              </select>
-            </Field>
-          )}
+              ))}
+            </select>
+          </Field>
           {!editing && (
             <Field label="Tour (opcional: convierte este viaje en una salida reservable)">
               <select

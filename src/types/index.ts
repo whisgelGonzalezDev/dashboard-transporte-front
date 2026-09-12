@@ -76,6 +76,7 @@ export interface CreateViajeDto {
 }
 
 export interface UpdateViajeDto {
+  busId?: string
   rutaOrigen?: string
   rutaDestino?: string
   fechaSalida?: string
