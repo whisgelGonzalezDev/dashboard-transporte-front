@@ -15,10 +15,10 @@ interface DataTableProps<T> {
 
 export function DataTable<T>({ rows, columns, getRowKey, actions }: DataTableProps<T>) {
   return (
-    <div className="overflow-x-auto rounded-xl border border-ink-100 bg-white">
+    <div className="overflow-x-auto rounded-xl border border-navy-100 bg-white">
       <table className="w-full min-w-max text-left text-sm">
         <thead>
-          <tr className="border-b border-ink-100 bg-ink-50 text-xs font-semibold uppercase tracking-wide text-ink-400">
+          <tr className="font-label border-b border-navy-100 bg-navy-50 text-xs font-semibold uppercase tracking-wide text-navy-400">
             {columns.map((col) => (
               <th key={col.header} className={`px-4 py-3 ${col.className ?? ''}`}>
                 {col.header}
@@ -29,9 +29,9 @@ export function DataTable<T>({ rows, columns, getRowKey, actions }: DataTablePro
         </thead>
         <tbody>
           {rows.map((row) => (
-            <tr key={getRowKey(row)} className="border-b border-ink-50 last:border-0 hover:bg-ink-50/60">
+            <tr key={getRowKey(row)} className="border-b border-navy-50 last:border-0 hover:bg-navy-50/60">
               {columns.map((col) => (
-                <td key={col.header} className={`px-4 py-3 text-ink-700 ${col.className ?? ''}`}>
+                <td key={col.header} className={`px-4 py-3 text-navy-700 ${col.className ?? ''}`}>
                   {col.render(row)}
                 </td>
               ))}

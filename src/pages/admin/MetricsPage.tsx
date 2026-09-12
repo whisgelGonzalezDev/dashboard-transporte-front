@@ -9,14 +9,14 @@ const currencyFormatter = new Intl.NumberFormat('en-US', { style: 'currency', cu
 function StatCard({ label, value, tone = 'default' }: { label: string; value: string; tone?: 'default' | 'positive' | 'warning' }) {
   const toneClass =
     tone === 'positive'
-      ? 'text-jungle-700'
+      ? 'text-green-700'
       : tone === 'warning'
-        ? 'text-adventure-700'
-        : 'text-ink-900'
+        ? 'text-gold-700'
+        : 'text-navy-900'
   return (
-    <div className="rounded-2xl border border-ink-100 bg-white p-5">
-      <p className="text-xs font-medium uppercase tracking-wide text-ink-400">{label}</p>
-      <p className={`mt-2 font-display text-2xl font-semibold ${toneClass}`}>{value}</p>
+    <div className="rounded-2xl border border-navy-100 bg-white p-5">
+      <p className="font-label text-xs font-semibold uppercase tracking-wide text-navy-400">{label}</p>
+      <p className={`font-label mt-2 text-2xl font-extrabold ${toneClass}`}>{value}</p>
     </div>
   )
 }
@@ -47,14 +47,14 @@ export function MetricsPage() {
           </div>
 
           <div>
-            <h3 className="mb-3 font-display text-lg font-semibold text-ink-900">Tours más reservados</h3>
+            <h3 className="mb-3 font-display text-lg font-semibold text-navy-900">Tours más reservados</h3>
             {metricas.topTours.length === 0 ? (
-              <p className="text-sm text-ink-400">Todavía no hay reservas para mostrar un ranking.</p>
+              <p className="text-sm text-navy-400">Todavía no hay reservas para mostrar un ranking.</p>
             ) : (
-              <div className="overflow-hidden rounded-xl border border-ink-100 bg-white">
+              <div className="overflow-hidden rounded-xl border border-navy-100 bg-white">
                 <table className="w-full text-left text-sm">
                   <thead>
-                    <tr className="border-b border-ink-100 bg-ink-50 text-xs font-semibold uppercase text-ink-400">
+                    <tr className="border-b border-navy-100 bg-navy-50 text-xs font-semibold uppercase text-navy-400">
                       <th className="px-4 py-3">Tour</th>
                       <th className="px-4 py-3">Reservas</th>
                       <th className="px-4 py-3">Pasajeros</th>
@@ -62,10 +62,10 @@ export function MetricsPage() {
                   </thead>
                   <tbody>
                     {metricas.topTours.map((t) => (
-                      <tr key={t.tourId} className="border-b border-ink-50 last:border-0">
-                        <td className="px-4 py-3 font-medium text-ink-900">{t.titulo}</td>
-                        <td className="px-4 py-3 text-ink-600">{t.reservas}</td>
-                        <td className="px-4 py-3 text-ink-600">{t.pasajeros}</td>
+                      <tr key={t.tourId} className="border-b border-navy-50 last:border-0">
+                        <td className="px-4 py-3 font-medium text-navy-900">{t.titulo}</td>
+                        <td className="px-4 py-3 text-navy-600">{t.reservas}</td>
+                        <td className="px-4 py-3 text-navy-600">{t.pasajeros}</td>
                       </tr>
                     ))}
                   </tbody>

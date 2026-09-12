@@ -12,7 +12,7 @@ export function Modal({ open, title, onClose, children }: ModalProps) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-ink-900/50 p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-navy-900/50 p-4"
       onClick={onClose}
     >
       <div
@@ -20,11 +20,11 @@ export function Modal({ open, title, onClose, children }: ModalProps) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="font-display text-lg font-semibold text-ink-900">{title}</h2>
+          <h2 className="font-display text-lg font-semibold text-navy-900">{title}</h2>
           <button
             onClick={onClose}
             aria-label="Cerrar"
-            className="rounded-full p-1 text-ink-400 hover:bg-ink-100 hover:text-ink-700"
+            className="rounded-full p-1 text-navy-400 hover:bg-navy-100 hover:text-navy-700"
           >
             ✕
           </button>

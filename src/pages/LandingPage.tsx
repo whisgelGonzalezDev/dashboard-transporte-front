@@ -21,30 +21,39 @@ export function LandingPage() {
   const [selectedTour, setSelectedTour] = useState<TourDTO | null>(null)
 
   return (
-    <div className="flex-1 bg-ink-50">
-      <header className="border-b border-ink-100 bg-white">
+    <div className="flex-1 bg-navy-50">
+      <header className="border-b border-navy-100 bg-white">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <div className="flex items-center gap-2">
             <span className="text-2xl">🌋</span>
-            <span className="font-display text-lg font-semibold text-ink-900">
+            <span className="font-display text-lg font-semibold text-navy-900">
               Corazón Aventurero
             </span>
           </div>
           <Link
             to="/login"
-            className="text-sm font-medium text-ink-400 hover:text-adventure-600"
+            className="text-sm font-medium text-navy-400 hover:text-gold-600"
           >
             Acceso administrativo
           </Link>
         </div>
       </header>
 
-      <section className="bg-gradient-to-br from-adventure-500 via-adventure-600 to-jungle-700 px-6 py-16 text-white">
+      <section
+        className="relative overflow-hidden px-6 py-20 text-white"
+        style={{
+          background:
+            'radial-gradient(1200px 700px at 78% -8%, rgba(34,51,90,.55), transparent 60%), radial-gradient(900px 600px at 8% 108%, rgba(210,42,56,.2), transparent 55%), #0E1730',
+        }}
+      >
         <div className="mx-auto max-w-6xl text-center">
-          <h1 className="font-display text-3xl font-bold sm:text-4xl">
-            Vive la aventura que estabas buscando
+          <p className="font-label text-xs font-bold uppercase tracking-[0.4em] text-gold-400">
+            Aventura sin límites
+          </p>
+          <h1 className="font-display mt-4 text-3xl font-bold sm:text-4xl">
+            Vive la aventura que estabas <span className="text-gold-400">buscando</span>
           </h1>
-          <p className="mx-auto mt-3 max-w-2xl text-adventure-50/90">
+          <p className="mx-auto mt-3 max-w-2xl text-ivory/80">
             Explora nuestros tours activos: naturaleza, playa y cultura en un solo lugar.
             Cupos limitados, guías locales y transporte incluido.
           </p>
@@ -53,9 +62,9 @@ export function LandingPage() {
 
       <section className="mx-auto max-w-6xl px-6 py-12">
         <div className="mb-6 flex items-baseline justify-between">
-          <h2 className="font-display text-2xl font-semibold text-ink-900">Tours activos</h2>
+          <h2 className="font-display text-2xl font-semibold text-navy-900">Tours activos</h2>
           {tours && tours.length > 0 && (
-            <span className="text-sm text-ink-400">{tours.length} disponibles</span>
+            <span className="text-sm text-navy-400">{tours.length} disponibles</span>
           )}
         </div>
 
@@ -81,7 +90,7 @@ export function LandingPage() {
         )}
       </section>
 
-      <footer className="border-t border-ink-100 bg-white px-6 py-6 text-center text-xs text-ink-400">
+      <footer className="border-t border-navy-100 bg-white px-6 py-6 text-center text-xs text-navy-400">
         © {new Date().getFullYear()} Corazón Aventurero. Todos los derechos reservados.
       </footer>
 

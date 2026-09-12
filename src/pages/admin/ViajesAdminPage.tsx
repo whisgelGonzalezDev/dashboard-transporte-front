@@ -30,10 +30,10 @@ const ESTADO_LABEL: Record<EstadoViaje, string> = {
 }
 
 const ESTADO_BADGE: Record<EstadoViaje, string> = {
-  [EstadoViaje.PROGRAMADO]: 'bg-adventure-100 text-adventure-700',
-  [EstadoViaje.EN_CURSO]: 'bg-jungle-100 text-jungle-700',
-  [EstadoViaje.COMPLETADO]: 'bg-ink-100 text-ink-500',
-  [EstadoViaje.CANCELADO]: 'bg-red-100 text-red-700',
+  [EstadoViaje.PROGRAMADO]: 'bg-gold-100 text-gold-700',
+  [EstadoViaje.EN_CURSO]: 'bg-green-100 text-green-700',
+  [EstadoViaje.COMPLETADO]: 'bg-navy-100 text-navy-500',
+  [EstadoViaje.CANCELADO]: 'bg-crimson-100 text-crimson-700',
 }
 
 interface FormState {
@@ -155,7 +155,7 @@ export function ViajesAdminPage() {
     {
       header: 'Ruta',
       render: (v) => (
-        <span className="font-medium text-ink-900">
+        <span className="font-medium text-navy-900">
           {v.rutaOrigen} → {v.rutaDestino}
         </span>
       ),
@@ -163,18 +163,18 @@ export function ViajesAdminPage() {
     {
       header: 'Bus',
       render: (v) => (
-        <span className="text-ink-600">{buses?.find((b) => b.id === v.busId)?.placa ?? '—'}</span>
+        <span className="text-navy-600">{buses?.find((b) => b.id === v.busId)?.placa ?? '—'}</span>
       ),
     },
     {
       header: 'Tour',
       render: (v) =>
         v.tourId ? (
-          <span className="text-adventure-700">
+          <span className="text-gold-700">
             {tours?.find((t) => t.id === v.tourId)?.titulo ?? '—'}
           </span>
         ) : (
-          <span className="text-ink-300">—</span>
+          <span className="text-navy-300">—</span>
         ),
     },
     { header: 'Salida', render: (v) => `${v.fechaSalida?.slice(0, 10)} · ${v.horaSalida}` },
@@ -349,7 +349,7 @@ export function ViajesAdminPage() {
             />
           </Field>
 
-          {formError && <p className="text-sm text-red-600">{formError}</p>}
+          {formError && <p className="text-sm text-crimson-600">{formError}</p>}
 
           <div className="mt-2 flex justify-end gap-3">
             <Button variant="secondary" type="button" onClick={() => setFormOpen(false)}>

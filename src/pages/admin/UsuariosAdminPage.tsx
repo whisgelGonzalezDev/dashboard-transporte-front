@@ -102,7 +102,7 @@ export function UsuariosAdminPage() {
   }
 
   const columns: Column<UsuarioDTO>[] = [
-    { header: 'Nombre', render: (u) => <span className="font-medium text-ink-900">{u.nombre}</span> },
+    { header: 'Nombre', render: (u) => <span className="font-medium text-navy-900">{u.nombre}</span> },
     { header: 'Email', render: (u) => u.email },
     { header: 'Rol', render: (u) => ROL_LABEL[u.rol] },
     {
@@ -110,7 +110,7 @@ export function UsuariosAdminPage() {
       render: (u) => (
         <span
           className={`rounded-full px-2 py-0.5 text-xs font-semibold ${
-            u.estado === EstadoUsuario.ACTIVO ? 'bg-jungle-100 text-jungle-700' : 'bg-ink-100 text-ink-500'
+            u.estado === EstadoUsuario.ACTIVO ? 'bg-green-100 text-green-700' : 'bg-navy-100 text-navy-500'
           }`}
         >
           {u.estado === EstadoUsuario.ACTIVO ? 'Activo' : 'Inactivo'}
@@ -210,7 +210,7 @@ export function UsuariosAdminPage() {
             )}
           </div>
 
-          {formError && <p className="text-sm text-red-600">{formError}</p>}
+          {formError && <p className="text-sm text-crimson-600">{formError}</p>}
 
           <div className="mt-2 flex justify-end gap-3">
             <Button variant="secondary" type="button" onClick={() => setFormOpen(false)}>

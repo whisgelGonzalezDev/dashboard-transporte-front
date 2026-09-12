@@ -3,12 +3,13 @@ import type { ButtonHTMLAttributes } from 'react'
 type Variant = 'primary' | 'secondary' | 'danger' | 'ghost'
 
 const VARIANT_CLASSES: Record<Variant, string> = {
+  // Oro + texto oscuro: el mismo par de la marca (botón "GIRAR" de la ruleta).
   primary:
-    'bg-adventure-500 text-white hover:bg-adventure-600 focus-visible:outline-adventure-600',
+    'font-label bg-gold-500 text-navy-900 hover:bg-gold-400 focus-visible:outline-gold-600',
   secondary:
-    'bg-ink-100 text-ink-800 hover:bg-ink-200 focus-visible:outline-ink-400',
-  danger: 'bg-red-600 text-white hover:bg-red-700 focus-visible:outline-red-600',
-  ghost: 'bg-transparent text-ink-600 hover:bg-ink-100 focus-visible:outline-ink-300',
+    'bg-navy-100 text-navy-800 hover:bg-navy-200 focus-visible:outline-navy-400',
+  danger: 'bg-crimson-600 text-white hover:bg-crimson-700 focus-visible:outline-crimson-600',
+  ghost: 'bg-transparent text-navy-600 hover:bg-navy-100 focus-visible:outline-navy-300',
 }
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

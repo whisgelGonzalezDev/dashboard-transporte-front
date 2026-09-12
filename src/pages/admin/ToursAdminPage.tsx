@@ -98,13 +98,13 @@ export function ToursAdminPage() {
             className="h-10 w-14 rounded-md object-cover"
             onError={(e) => (e.currentTarget.style.visibility = 'hidden')}
           />
-          <span className="font-medium text-ink-900">{t.titulo}</span>
+          <span className="font-medium text-navy-900">{t.titulo}</span>
         </div>
       ),
     },
     {
       header: 'Descripción',
-      render: (t) => <span className="line-clamp-2 max-w-xs text-ink-500">{t.descripcion}</span>,
+      render: (t) => <span className="line-clamp-2 max-w-xs text-navy-500">{t.descripcion}</span>,
     },
     { header: 'Precio', render: (t) => currencyFormatter.format(t.precio) },
     {
@@ -112,7 +112,7 @@ export function ToursAdminPage() {
       render: (t) => (
         <span
           className={`rounded-full px-2 py-0.5 text-xs font-semibold ${
-            t.activo ? 'bg-jungle-100 text-jungle-700' : 'bg-ink-100 text-ink-500'
+            t.activo ? 'bg-green-100 text-green-700' : 'bg-navy-100 text-navy-500'
           }`}
         >
           {t.activo ? 'Activo' : 'Inactivo'}
@@ -204,7 +204,7 @@ export function ToursAdminPage() {
             />
           </Field>
 
-          {formError && <p className="text-sm text-red-600">{formError}</p>}
+          {formError && <p className="text-sm text-crimson-600">{formError}</p>}
 
           <div className="mt-2 flex justify-end gap-3">
             <Button variant="secondary" type="button" onClick={() => setFormOpen(false)}>

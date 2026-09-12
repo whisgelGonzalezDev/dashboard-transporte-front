@@ -28,9 +28,9 @@ const ESTADO_LABEL: Record<EstadoCuenta, string> = {
 }
 
 const ESTADO_BADGE: Record<EstadoCuenta, string> = {
-  [EstadoCuenta.PENDIENTE]: 'bg-red-100 text-red-700',
-  [EstadoCuenta.PARCIAL]: 'bg-adventure-100 text-adventure-700',
-  [EstadoCuenta.PAGADO]: 'bg-jungle-100 text-jungle-700',
+  [EstadoCuenta.PENDIENTE]: 'bg-crimson-100 text-crimson-700',
+  [EstadoCuenta.PARCIAL]: 'bg-gold-100 text-gold-700',
+  [EstadoCuenta.PAGADO]: 'bg-green-100 text-green-700',
 }
 
 export function ReservasAdminPage() {
@@ -65,11 +65,11 @@ export function ReservasAdminPage() {
   }
 
   const columns: Column<ReservaDTO>[] = [
-    { header: 'Viaje', render: (r) => <span className="text-ink-500">{viajeLabel(r.viajeId)}</span> },
+    { header: 'Viaje', render: (r) => <span className="text-navy-500">{viajeLabel(r.viajeId)}</span> },
     {
       header: 'Contacto principal',
       render: (r) => (
-        <span className="font-medium text-ink-900">{r.pasajeroPrincipal?.nombre ?? '—'}</span>
+        <span className="font-medium text-navy-900">{r.pasajeroPrincipal?.nombre ?? '—'}</span>
       ),
     },
     { header: 'Personas', render: (r) => r.cantidadPasajeros },
@@ -129,7 +129,7 @@ export function ReservasAdminPage() {
 
       <Modal open={!!abonando} title="Registrar abono" onClose={() => setAbonando(null)}>
         <form className="flex flex-col gap-4" onSubmit={handleAbonar}>
-          <p className="text-sm text-ink-500">
+          <p className="text-sm text-navy-500">
             Saldo pendiente: {abonando && currencyFormatter.format(abonando.saldo)}
           </p>
           <Field label="Monto a abonar (USD)">
@@ -162,16 +162,16 @@ export function ReservasAdminPage() {
             {pasajerosDetalle.map((p) => (
               <li
                 key={p.id}
-                className="flex items-center justify-between rounded-lg border border-ink-100 px-3 py-2"
+                className="flex items-center justify-between rounded-lg border border-navy-100 px-3 py-2"
               >
                 <div>
-                  <span className="font-medium text-ink-900">
+                  <span className="font-medium text-navy-900">
                     {p.esPrincipal && '★ '}
                     {p.nombre}
                   </span>
-                  <p className="text-xs text-ink-400">{p.documento} · {p.email}</p>
+                  <p className="text-xs text-navy-400">{p.documento} · {p.email}</p>
                 </div>
-                <span className="text-xs text-ink-500">
+                <span className="text-xs text-navy-500">
                   {p.numeroAsiento ? `Asiento ${p.numeroAsiento}` : 'Sin asiento'}
                 </span>
               </li>

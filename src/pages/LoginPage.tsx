@@ -29,14 +29,14 @@ export function LoginPage() {
   }
 
   return (
-    <div className="flex flex-1 items-center justify-center bg-ink-50 px-4">
-      <div className="w-full max-w-sm rounded-2xl border border-ink-100 bg-white p-8 shadow-sm">
+    <div className="flex flex-1 items-center justify-center bg-navy-50 px-4">
+      <div className="w-full max-w-sm rounded-2xl border border-navy-100 bg-white p-8 shadow-sm">
         <div className="mb-6 flex flex-col items-center gap-2 text-center">
           <span className="text-3xl">🌋</span>
-          <h1 className="font-display text-xl font-semibold text-ink-900">
+          <h1 className="font-display text-xl font-semibold text-navy-900">
             Corazón Aventurero
           </h1>
-          <p className="text-sm text-ink-400">Acceso al panel administrativo</p>
+          <p className="text-sm text-navy-400">Acceso al panel administrativo</p>
         </div>
 
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
@@ -60,7 +60,7 @@ export function LoginPage() {
             />
           </Field>
 
-          {error && <p className="text-sm text-red-600">{error}</p>}
+          {error && <p className="text-sm text-crimson-600">{error}</p>}
 
           <Button type="submit" disabled={isLoggingIn} className="mt-2 w-full">
             {isLoggingIn ? 'Ingresando…' : 'Ingresar'}
