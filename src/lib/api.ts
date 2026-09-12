@@ -35,8 +35,8 @@ httpClient.interceptors.response.use(
   (error) => {
     if (error?.response?.status === 401) {
       clearSession()
-      if (location.pathname !== '/login') {
-        location.assign('/login')
+      if (location.hash !== '#/login') {
+        location.hash = '#/login'
       }
     }
 
