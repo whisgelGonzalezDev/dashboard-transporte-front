@@ -8,6 +8,7 @@ import { ConfirmDialog } from '../../components/ui/ConfirmDialog'
 import { DataTable, type Column } from '../../components/ui/DataTable'
 import { EmptyState, ErrorState, LoadingState } from '../../components/ui/States'
 import { Field, inputClass } from '../../components/ui/Field'
+import { ImageUploadField } from '../../components/ui/ImageUploadField'
 
 const tourHooks = createResourceHooks<TourDTO, CreateTourDto, UpdateTourDto>('tours')
 
@@ -68,6 +69,10 @@ export function ToursAdminPage() {
     const precio = Number(form.precio)
     if (Number.isNaN(precio) || precio <= 0) {
       setFormError('El precio debe ser un número mayor a 0.')
+      return
+    }
+    if (!form.imagenUrl.trim()) {
+      setFormError('Sube una imagen para el tour.')
       return
     }
 
@@ -196,15 +201,11 @@ export function ToursAdminPage() {
               required
             />
           </Field>
-          <Field label="URL de la imagen">
-            <input
-              className={inputClass}
-              value={form.imagenUrl}
-              onChange={(e) => setForm({ ...form, imagenUrl: e.target.value })}
-              placeholder="https://…"
-              required
-            />
-          </Field>
+          <ImageUploadField
+            label="Imagen del tour"
+            value={form.imagenUrl}
+            onChange={(imagenUrl) => setForm({ ...form, imagenUrl })}
+          />
 
           {formError && <p className="text-sm text-crimson-600 dark:text-crimson-400">{formError}</p>}
 

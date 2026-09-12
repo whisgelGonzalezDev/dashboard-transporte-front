@@ -59,3 +59,14 @@ export const api = {
     httpClient.patch<T>(path, data).then((r) => r.data),
   delete: (path: string) => httpClient.delete(path).then(() => undefined),
 }
+
+/** Sube una imagen (multipart) y devuelve su URL pública en el bucket de Supabase. */
+export async function uploadImage(file: File): Promise<string> {
+  const formData = new FormData()
+  formData.append('file', file)
+  const response = await httpClient.post<{ url: string }>('/uploads/image', formData, {
+    // Content-Type: undefined deja que el navegador arme el multipart con su propio boundary.
+    headers: { 'Content-Type': undefined },
+  })
+  return response.data.url
+}
